@@ -26,11 +26,11 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         task = await asyncio.create_task(wait_random(max_delay))
         elapsed_time.append(task)
 
-    while elapsed_time:
+    '''while elapsed_time:
         smallest = elapsed_time[0]
         for x in elapsed_time:
             if x < smallest:
                 smallest = x
         sorted_elapsed_time.append(smallest)
-        elapsed_time.remove(smallest)
-    return sorted_elapsed_time
+        elapsed_time.remove(smallest)'''
+    return elapsed_time
