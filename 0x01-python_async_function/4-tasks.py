@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 This module contains a coroutine wait_n that
 returns the list of all the delays
