@@ -33,4 +33,4 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
                 smallest = x
         sorted_elapsed_time.append(smallest)
         elapsed_time.remove(smallest)
-    return elapsed_time
+    return sorted_elapsed_time
