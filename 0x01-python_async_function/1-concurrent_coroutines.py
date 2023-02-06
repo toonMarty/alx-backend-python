@@ -20,10 +20,9 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         sorted_elapsed_time(list): a sorted list of delays
     """
     elapsed_time = []
-    sorted_elapsed_time = []
 
     for i in range(n):
-        task = await asyncio.create_task(wait_random(max_delay))
+        task = await wait_random(max_delay)
         elapsed_time.append(task)
 
     return sorted(elapsed_time)
