@@ -4,6 +4,7 @@ This module contains a coroutine wait_n that
 returns the list of all the delays
 """
 
+import asyncio
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
@@ -22,7 +23,7 @@ async def wait_n(n: int, max_delay: int) -> list:
     sorted_elapsed_time = []
 
     for i in range(n):
-        task = await wait_random(max_delay)
+        task = await asyncio.ensure_future(wait_random(max_delay))
         elapsed_time.append(task)
 
     while elapsed_time:
