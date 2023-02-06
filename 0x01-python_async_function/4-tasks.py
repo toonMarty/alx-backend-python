@@ -20,17 +20,9 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
         sorted_elapsed_time(list): a sorted list of delays
     """
     elapsed_time = []
-    sorted_elapsed_time = []
 
     for i in range(n):
         task = await task_wait_random(max_delay)
         elapsed_time.append(task)
 
-    while elapsed_time:
-        smallest = elapsed_time[0]
-        for x in elapsed_time:
-            if x < smallest:
-                smallest = x
-        sorted_elapsed_time.append(smallest)
-        elapsed_time.remove(smallest)
-    return sorted_elapsed_time
+    return sorted(elapsed_time)
