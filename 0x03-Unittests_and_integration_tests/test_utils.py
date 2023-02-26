@@ -4,10 +4,12 @@ This module contains a class that tests
 the access_nested_map method from the module
 utils.py
 """
+import requests
 from parameterized import parameterized
 import unittest
-from utils import access_nested_map
+from utils import access_nested_map, get_json
 from typing import Mapping, Sequence, Any
+from unittest.mock import patch, Mock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -56,3 +58,31 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    """
+    This class defines TestGetJson that
+    contains a test_get_json method
+    """
+    @patch('utils.requests')
+    def test_get_json(self, mock_requests: Any) -> None:
+        """
+        This method tests whether get_json returns the expected
+        result
+        Args:
+            mock_requests (Any): a mock request
+        Return:
+             NoneType
+        """
+        mock_response = Mock()
+        mock_response.json.return_value = {'payload': False}
+        mock_requests.get.return_value = mock_response
+        self.assertEqual(get_json('http://holberton.io'), {'payload': False})
+        assert mock_response.get.Called
+
+        mock_response_2 = Mock()
+        mock_response_2.json.return_value = {'payload': True}
+        mock_requests.get.return_value = mock_response_2
+        self.assertEqual(get_json('http://example.com'), {'payload': True})
+        assert mock_response_2.get.Called
