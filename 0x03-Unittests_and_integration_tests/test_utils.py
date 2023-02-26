@@ -35,3 +35,24 @@ class TestAccessNestedMap(unittest.TestCase):
             None
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
+
+    @parameterized.expand(
+        [
+            ({}, ('a', 'b')),
+            ({'a': 1}, ('a', 'b'))
+        ]
+    )
+    def test_access_nested_map_exception(self, nested_map: Mapping,
+                                         path: Sequence) -> None:
+        """
+        This method uses the assertRaises context manager to
+        test that a KeyError is raised for a given set of
+        inputs
+        Args:
+            nested_map (Mapping): a nested mapping object, eg. a dictionary
+            path (Sequence): a sequence object eg. a tuple, list
+        Return:
+             NoneType
+        """
+        with self.assertRaises(KeyError):
+            access_nested_map(nested_map, path)
