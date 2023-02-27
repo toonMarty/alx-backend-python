@@ -8,7 +8,7 @@ import requests
 from parameterized import parameterized
 import unittest
 from utils import access_nested_map, get_json
-from typing import Mapping, Sequence, Any
+from typing import Mapping, Sequence, Any, Dict
 from unittest.mock import patch, Mock
 
 
@@ -65,23 +65,22 @@ class TestGetJson(unittest.TestCase):
     This class defines TestGetJson that
     contains a test_get_json method
     """
-    @patch('utils.requests')
-    def test_get_json(self, mock_requests: Any) -> None:
+    @parameterized.expand(
+        [
+            ("http://example.com", {"payload": True}),
+            ("http://holberton.io", {"payload": False})
+        ]
+    )
+    @patch('test_utils.get_json')
+    def test_get_json(self, test_url: str, test_payload: Mapping,
+                      mock_ret: Dict) -> None:
         """
         This method tests whether get_json returns the expected
         result
         Args:
-            mock_requests (Any): a mock request
+            mock_ret (Dict): a mock return value
         Return:
              NoneType
         """
-        mock_response = Mock()
-        mock_response.json.return_value = {'payload': False}
-        mock_requests.get.return_value = mock_response
-        self.assertEqual(get_json('http://holberton.io'), {'payload': False})
-        mock_requests.get.assert_called_once()
-
-        mock_response_2 = Mock()
-        mock_response_2.json.return_value = {'payload': True}
-        mock_requests.get.return_value = mock_response_2
-        self.assertEqual(get_json('http://example.com'), {'payload': True})
+        mock_ret.return_value = test_payload
+        self.assertEqual(get_json(test_url), test_payload)
