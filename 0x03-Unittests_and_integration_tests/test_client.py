@@ -24,7 +24,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ]
     )
     @patch('client.get_json')
-    def test_org(self, org: str, expected: Dict, get_patch: Any) -> None:
+    def test_org(self, org, expected, get_patch):
         """
         This method tests the org method returns the
         correct value
