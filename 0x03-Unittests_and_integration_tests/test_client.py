@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch, PropertyMock, Mock, call
 from parameterized import parameterized, parameterized_class
 from client import GithubOrgClient
-from typing import Dict
+from typing import Dict, Any
 
 from fixtures import TEST_PAYLOAD
 
@@ -24,7 +24,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ]
     )
     @patch('client.get_json')
-    def test_org(self, org: str, expected, get_patch) -> None:
+    def test_org(self, org: str, expected: Dict, get_patch: Any) -> None:
         """
         This method tests the org method returns the
         correct value
