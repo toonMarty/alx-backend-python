@@ -7,3 +7,9 @@ The method has been decorated with @parameterized.expand to test the function fo
 # 1. Parameterize a unit test
 Implementing TestAccessNestedMap.test_access_nested_map_exception that uses the assertRaises context
 manager to test that a KeyError is raised for a given set of inputs
+
+# 2. Mock HTTP calls
+Implementing the TestGetJson.test_get_json method to test that utils.get_json returns the expected result.
+
+# 3. Parameterize and patch
+Implementing the test_memoizee method
