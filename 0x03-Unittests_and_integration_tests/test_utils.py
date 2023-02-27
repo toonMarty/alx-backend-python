@@ -7,7 +7,7 @@ utils.py
 import requests
 from parameterized import parameterized
 import unittest
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from typing import Mapping, Sequence, Any, Dict
 from unittest.mock import patch, Mock
 
@@ -91,13 +91,28 @@ class TestMemoize(unittest.TestCase):
     A class definition that defines memoization
     """
     def test_memoize(self):
+        """
+        This method tests the memoize method returns
+        the expected output
+        Return:
+            NoneType
+        """
         class TestClass:
+            """The definition of the class TestClass"""
 
             def a_method(self):
+                """
+                The a_method that returns a value
+                Return:
+                    int
+                """
                 return 42
 
             @memoize
             def a_property(self):
+                """
+                This method returns the method a_method
+                """
                 return self.a_method()
 
         with patch.object(TestClass, 'a_method', return_value=42) as p:
